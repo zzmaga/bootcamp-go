@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# List files and directories, ignoring hidden files, ".", ".."
+# Order by access time (newest first), and output a comma-separated list
+# with directories listed without a trailing slash and no leading 0
+
+ls -ltu --ignore=".*" | grep -vE '^(\.|\.\.)$' | awk '{if (NF > 0) print $NF}' | \
+    sed 's|/||' | tail -n +2 | paste -sd, -
+
+
